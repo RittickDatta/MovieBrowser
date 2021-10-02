@@ -1,12 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import { BrowserRouter } from 'react-router-dom';
+import Layout from './common/Layout/Layout';
 function App() {
   return (
-    <div className="App">
-     
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <Layout />
+      </div>
+    </BrowserRouter>
   );
 }
 
