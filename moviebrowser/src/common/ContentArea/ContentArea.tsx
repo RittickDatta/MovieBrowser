@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from './ContentArea.module.css'
 import MoviesHomeContainer from '../../containers/MoviesHomeContainer/MoviesHomeContainer'
-function ContentArea() {
+function ContentArea(props:any) {
     return (
-        <>
-            <MoviesHomeContainer />
-        </>
+        <div className={styles.container}>
+            {/* <MoviesHomeContainer /> */}
+            {props.children}
+        </div>
     )
 }
 

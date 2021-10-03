@@ -1,0 +1,23 @@
+.navItems {
+    list-style-type: none;
+    display: flex;
+    align-content: center;
+}
+
+.navItem {
+    padding: 5px 10px;
+}
+
+.navItem > a {
+    text-decoration: none;
+    color: black;
+}
+
+.navItem:hover {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.active {
+    font-weight: bold;
+}

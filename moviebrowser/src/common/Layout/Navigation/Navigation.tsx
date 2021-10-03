@@ -4,7 +4,7 @@ import Logo from './Logo/Logo'
 import NavItems from './NavItems/NavItems'
 function Navigation() {
     return (
-        <div>
+        <div className={styles.navBar}>
             <Logo />
             <NavItems />
         </div>
