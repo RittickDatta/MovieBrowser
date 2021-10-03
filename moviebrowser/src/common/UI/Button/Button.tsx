@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Button.module.css'
-function Button() {
+function Button(props:any) {
     return (
-        <div>
-            
+        <div className={props.btnStyle}>
+            {props.btnText}
         </div>
     )
 }
