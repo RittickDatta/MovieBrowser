@@ -12,8 +12,9 @@ export const getMovies = async () => {
     return res
 }
 
-export const getMoviesByCategory = (category:string) => {
-
+export const getMoviesByCategory = async (categoryID:string) => {
+    const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=444ac925120d16acbc19fcc545c05ec2&with_genres=${categoryID}`).then(res => res.json()).then(res => res);
+    return res;
 }
 
 export const search = (searchText: string) => {

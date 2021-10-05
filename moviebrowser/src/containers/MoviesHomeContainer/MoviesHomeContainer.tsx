@@ -3,13 +3,14 @@ import styles from './MoviesHomeContainer.module.css'
 import SearchContainer from '../SearchContainer/SearchContainer'
 import BrowseContainer from '../BrowseContainer/BrowseContainer'
 import { useEffect, useState } from 'react';
-import { getGenres, getMovies } from '../../services/movieService';
+import { getGenres, getMovies, getMoviesByCategory } from '../../services/movieService';
 import { processMovieAPIResults } from '../../helpers/processMovieAPIResults';
 import { Movie } from '../../types/Movie';
 import { getGenreID } from '../../helpers/getGenreID';
 
 function MoviesHomeContainer() {
     const [genre, setGenre] = useState([])
+    const [activeGenreID, setActiveGenreID] = useState(null)
     const [movies, setMovies] = useState([]);
     const [currPage, setCurrPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
@@ -32,7 +33,7 @@ function MoviesHomeContainer() {
             setTotalPages(total_pages);
             setTotalResults(total_results);
         });
-        const genreResults = genres.then(res => {
+        genres.then(res => {
             console.log(':::::::genre::::::::', res)
             const { genres } = res;
             setGenre(genres);
@@ -47,6 +48,23 @@ function MoviesHomeContainer() {
         const genreID = getGenreID(genre, category)
         if(genreID !== -1) {
             console.log('Selected category GenreID:::', genreID);
+            const moviesByCategory = (async () => await getMoviesByCategory(genreID))();
+            moviesByCategory.then(res => {
+                console.log('::::::::moviesByCategory:::::::::', res);
+                const {
+                    page, 
+                    results,
+                    total_pages,
+                    total_results
+                } = res;
+                const processedMoviesByCategory:any = processMovieAPIResults(results);
+                setCurrPage(page);
+                setMovies(processedMoviesByCategory);
+                setTotalPages(total_pages);
+                setTotalResults(total_results);
+            })
+            setActiveGenreID(genreID)
+         
         }
     }
 
@@ -57,6 +75,7 @@ function MoviesHomeContainer() {
                 categorySelected={categorySelectedHandler}
                 movies={movies}
                 genres={genre}
+                activeGenreID={activeGenreID}
             />
         </>
     )

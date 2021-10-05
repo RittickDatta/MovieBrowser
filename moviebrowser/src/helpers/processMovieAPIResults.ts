@@ -1,12 +1,14 @@
 export const processMovieAPIResults = (movies:any[]) => {
     const newMovies = movies.map((movie:any) => {
         const {
+            id,
             title,
             release_date,
             poster_path
         } = movie;
 
         return {
+            id,
             title,
             release_date,
             poster_path: `http://image.tmdb.org/t/p/w500${poster_path}`

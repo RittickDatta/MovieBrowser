@@ -5,10 +5,10 @@ import CategoryBar from '../../components/CategoryBar/CategoryBar';
 import MoviesList from '../../components/MoviesList/MoviesList';
 import { getGenreList } from '../../helpers/getGenreList';
 function BrowseContainer(props: any) {
-  const { genres } = props;
+  const { genres, activeGenreID } = props;
   const genreData = getGenreList(genres);
   const keys = genreData.genreIDs;
-  const values = genreData.genreNames
+  const values = genreData.genreNames;
   const categories = {
     keys,
     values,
@@ -17,7 +17,11 @@ function BrowseContainer(props: any) {
   return (
     <>
       <MovieGridTitle title='Browse movies by category' />
-      <CategoryBar categories={categories} categorySelected={categorySelected} />
+      <CategoryBar
+        categories={categories}
+        activeGenreID={activeGenreID}
+        categorySelected={categorySelected}
+      />
       <MoviesList movies={movies} />
     </>
   );
