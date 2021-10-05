@@ -1,0 +1,24 @@
+.categoryPill{
+    color: #c9c9c9;
+    margin: 5px;
+}
+
+.categoryPill:hover {
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.categoryPill:active {
+    color: black;
+    font-weight: bold;
+}
+
+.categoryPillsWrapper {
+    display: flex;
+    /* justify-content: space-around; */
+    align-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
