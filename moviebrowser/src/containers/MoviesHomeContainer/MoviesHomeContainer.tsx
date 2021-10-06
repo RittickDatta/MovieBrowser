@@ -7,10 +7,11 @@ import { getGenres, getMovies, getMoviesByCategory } from '../../services/movieS
 import { processMovieAPIResults } from '../../helpers/processMovieAPIResults';
 import { Movie } from '../../types/Movie';
 import { getGenreID } from '../../helpers/getGenreID';
+import { PAGE_SIZE } from '../../common/Constants/Constants';
 
 function MoviesHomeContainer() {
     const [genre, setGenre] = useState([])
-    const [activeGenreID, setActiveGenreID] = useState(null)
+    const [activeGenreID, setActiveGenreID] = useState(28)
     const [movies, setMovies] = useState([]);
     const [currPage, setCurrPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
@@ -19,19 +20,7 @@ function MoviesHomeContainer() {
         const genres = (async () => await getGenres())();
         const movies = async () => await getMovies();
         const results = movies().then(res => {
-            console.log('results:::::::',res)
-            const {
-                page, 
-                results,
-                total_pages,
-                total_results
-            } = res;
-            setCurrPage(page);
-            const processedMovieResults:any = processMovieAPIResults(results);
-            console.log('::::::::::processedMovieResults', processedMovieResults);
-            setMovies(processedMovieResults);
-            setTotalPages(total_pages);
-            setTotalResults(total_results);
+            updateMoviesAndPageData(res);
         });
         genres.then(res => {
             console.log(':::::::genre::::::::', res)
@@ -50,21 +39,21 @@ function MoviesHomeContainer() {
             console.log('Selected category GenreID:::', genreID);
             const moviesByCategory = (async () => await getMoviesByCategory(genreID))();
             moviesByCategory.then(res => {
-                console.log('::::::::moviesByCategory:::::::::', res);
-                const {
-                    page, 
-                    results,
-                    total_pages,
-                    total_results
-                } = res;
-                const processedMoviesByCategory:any = processMovieAPIResults(results);
-                setCurrPage(page);
-                setMovies(processedMoviesByCategory);
-                setTotalPages(total_pages);
-                setTotalResults(total_results);
+                updateMoviesAndPageData(res);
             })
             setActiveGenreID(genreID)
          
+        }
+    }
+
+    const updateCurrentPage = (pageNumber: number) => {
+        console.log('New Page Number>>>>>>>>>>>', pageNumber)
+        if(pageNumber !== currPage) {
+            setCurrPage(pageNumber)
+            const moviesByPageNumber = (async () => await getMoviesByCategory( activeGenreID.toString(), pageNumber))();
+            moviesByPageNumber.then(res => {
+                updateMoviesAndPageData(res)
+            })
         }
     }
 
@@ -76,9 +65,25 @@ function MoviesHomeContainer() {
                 movies={movies}
                 genres={genre}
                 activeGenreID={activeGenreID}
+                currPage={currPage}
+                totalPages={totalPages}
+                pageSize={PAGE_SIZE}
+                updateCurrentPage={updateCurrentPage}
             />
         </>
     )
+
+    function updateMoviesAndPageData(res: any) {
+        console.log('::::::::moviesByCategory:::::::::', res);
+        const {
+            page, results, total_pages, total_results
+        } = res;
+        const processedMoviesByCategory: any = processMovieAPIResults(results);
+        setCurrPage(page);
+        setMovies(processedMoviesByCategory);
+        setTotalPages(total_pages);
+        setTotalResults(total_results);
+    }
 }
 
 export default MoviesHomeContainer

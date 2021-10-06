@@ -3,8 +3,8 @@ export const getGenres = async () => {
     return res;
 }
 
-export const getMovies = async () => {
-    const res = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=444ac925120d16acbc19fcc545c05ec2&language=en-US&page=1').then(res => {
+export const getMovies = async (pageNumber:number = 1) => {
+    const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=444ac925120d16acbc19fcc545c05ec2&language=en-US&page=${pageNumber}`).then(res => {
         return res.json()
     }).then(res => res);
     console.log(':::getMovies:::',res);
@@ -12,8 +12,8 @@ export const getMovies = async () => {
     return res
 }
 
-export const getMoviesByCategory = async (categoryID:string) => {
-    const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=444ac925120d16acbc19fcc545c05ec2&with_genres=${categoryID}`).then(res => res.json()).then(res => res);
+export const getMoviesByCategory = async (categoryID:string = '1', pageNumber:number = 1) => {
+    const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=444ac925120d16acbc19fcc545c05ec2&with_genres=${categoryID}&page=${pageNumber}`).then(res => res.json()).then(res => res);
     return res;
 }
 
