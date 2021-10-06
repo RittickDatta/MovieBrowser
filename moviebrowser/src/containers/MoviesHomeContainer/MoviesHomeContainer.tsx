@@ -16,6 +16,7 @@ function MoviesHomeContainer() {
     const [currPage, setCurrPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
     const [totalResults, setTotalResults] = useState(null);
+    const [anySearchText, setAnySearchText] = useState(false)
     useEffect(() => {
         const genres = (async () => await getGenres())();
         const movies = async () => await getMovies();
@@ -57,9 +58,18 @@ function MoviesHomeContainer() {
         }
     }
 
+    const anySearchTextHandler = (searchTextPresent: boolean) => {
+        setAnySearchText(searchTextPresent)
+    }
+
     return (
         <>
-            <SearchContainer />
+            <SearchContainer 
+                updateWithSearchResults={updateMoviesAndPageData}
+                currPage={currPage}
+                activeGenreID={activeGenreID}
+                updateIfSearchText={setAnySearchText}
+            />
             <BrowseContainer
                 categorySelected={categorySelectedHandler}
                 movies={movies}
@@ -69,6 +79,7 @@ function MoviesHomeContainer() {
                 totalPages={totalPages}
                 pageSize={PAGE_SIZE}
                 updateCurrentPage={updateCurrentPage}
+                anySearchText={anySearchText}
             />
         </>
     )

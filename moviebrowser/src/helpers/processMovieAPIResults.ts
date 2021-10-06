@@ -1,5 +1,6 @@
 export const processMovieAPIResults = (movies:any[]) => {
-    const newMovies = movies.map((movie:any) => {
+    
+    const newMovies = movies && movies.map((movie:any) => {
         const {
             id,
             title,

@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './PageNotFound.module.css'
-function PageNotFound() {
+function PageNotFound(props:any) {
     return (
-        <div>
-            Page not found
+        <div className={styles.PageNotFoundWrapper}>
+            {props.msg}
         </div>
     )
 }
