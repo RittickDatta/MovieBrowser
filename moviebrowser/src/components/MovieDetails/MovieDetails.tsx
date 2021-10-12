@@ -16,7 +16,7 @@ import { getMovie } from '../../services/movieService'
 function MovieDetails(props:any) {
     const router:{id:string} = useParams();
     const { id } =router;
-    const [movie, setMovie] = useState(null)
+    const [movie, setMovie] = useState({})
     
 
     useEffect(() => {
@@ -34,11 +34,11 @@ function MovieDetails(props:any) {
         <ContentArea>
         <div>
             <div>
-                <MoviePoster />
+                <MoviePoster movie={movie}/>
             </div>
             <div>
                 <div>
-                    <MovieOverview />
+                    <MovieOverview movie={movie}/>
                     <Credits />
                 </div>
                 <div>

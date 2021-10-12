@@ -1,6 +1,11 @@
 import React from 'react'
 import styles from './MovieOverview.module.css'
-function MovieOverview() {
+function MovieOverview(props:any) {
+    // const { movie } = props;
+    // const {
+
+    // } = movie;
+
     return (
         <div>
             
