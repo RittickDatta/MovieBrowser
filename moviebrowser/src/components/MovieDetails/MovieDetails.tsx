@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './MovieDetails.module.css'
 import MoviePoster from './MoviePoster/MoviePoster'
 import MovieOverview from './MovieOverview/MovieOverview'
@@ -8,9 +8,30 @@ import CastList from './CastList/CastList'
 import Media from './Media/Media'
 import Keywords from './Keywords/Keywords'
 import Recommendations from './Recommendations/Recommendations'
+import Navigation from '../../common/Layout/Navigation/Navigation'
+import ContentArea from '../../common/ContentArea/ContentArea'
+import { useLocation, useParams } from 'react-router'
+import { getMovie } from '../../services/movieService'
 
-function MovieDetails() {
+function MovieDetails(props:any) {
+    const router:{id:string} = useParams();
+    const { id } =router;
+    const [movie, setMovie] = useState(null)
+    
+
+    useEffect(() => {
+        const movieData = getMovie(id);
+        movieData.then(data => {
+            console.log('movieData', data)
+            setMovie(data);
+        })
+    }, [])
+
+
     return (
+        <>
+        <Navigation/>
+        <ContentArea>
         <div>
             <div>
                 <MoviePoster />
@@ -39,6 +60,8 @@ function MovieDetails() {
                 <Recommendations />
             </div>
         </div>
+        </ContentArea>
+        </>
     )
 }
 

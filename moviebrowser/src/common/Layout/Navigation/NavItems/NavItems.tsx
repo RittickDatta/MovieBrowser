@@ -2,30 +2,11 @@ import React from 'react'
 import styles from './NavItems.module.css'
 import { Switch, Route, NavLink, Link } from 'react-router-dom'
 import PageNotFound from '../../../PageNotFound/PageNotFound'
+import MovieDetails from '../../../../components/MovieDetails/MovieDetails'
 
 function NavItems() { 
     return (
         <>
-            <Switch>
-                <Route path="/">
-
-                </Route>
-                <Route path="/movies" exact>
-                    
-                </Route>
-                <Route path="/movies/:id">
-                    
-                </Route>
-                <Route path="/tv-shows">
-                    
-                </Route>
-                <Route path="/kids">
-                    
-                </Route>
-                <Route path="*">
-                    <PageNotFound />
-                </Route>
-            </Switch>
                 {/* State here, navlinks */}
             <ul className={styles.navItems}>
                 <li className={styles.navItem}>

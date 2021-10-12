@@ -28,6 +28,9 @@ export const search = async (searchText: string='', currPage: number, activeGenr
     return res;
 }
 
-export const getMovie = (id:string) => {
-
+export const getMovie = async (id:string) => {
+    const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=444ac925120d16acbc19fcc545c05ec2&language=en-US`
+    ).then(res => res.json());
+    return res;
 }
