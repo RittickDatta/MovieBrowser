@@ -21,27 +21,25 @@ function MoviePoster(props: any) {
     genres && genres.map((genre: { id: number; name: string }) => genre.name);
 
   return (
-    <div>
+    <>
       <div>
-        <div className={styles.wrapper}>
         <img
           className={styles.backdrop}
           src={`http://image.tmdb.org/t/p/w500${backdrop_path}`}
           alt=''
         />
-        </div>
       </div>
       <div className={styles.infoBar}>
         <div className={styles.titleAndTag}>
           <h1>{title}</h1>
-          <h3>{tagline}</h3>
-          <h4>{`${status} | ${getReadableDate(
+          {/* <h3>{tagline}</h3> */}
+          <h4 className={styles.movieDetails}>{`${status}  |  ${getReadableDate(
             release_date
-          )} | ${processedGenres} | ${getTimeInHoursMins(runtime)}`}</h4>
+          )}  |  ${processedGenres}  |  ${getTimeInHoursMins(runtime)}`}</h4>
         </div>
         <div className={styles.rating}>{`${vote_average} (${vote_count})`}</div>
       </div>
-    </div>
+    </>
   );
 }
 

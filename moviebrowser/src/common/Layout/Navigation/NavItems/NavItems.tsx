@@ -14,7 +14,7 @@ function NavItems() {
                         Movies
                     </NavLink>
                 </li>
-                <li className={styles.navItem}>
+                {/* <li className={styles.navItem}>
                     <NavLink to="/tv-shows"  activeClassName={styles.active}>
                         TV Shows
                     </NavLink>
@@ -23,7 +23,7 @@ function NavItems() {
                     <NavLink to="/kids"  activeClassName={styles.active}>
                         Kids
                     </NavLink>
-                </li>
+                </li> */}
             </ul>
         </>
     )

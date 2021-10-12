@@ -32,7 +32,7 @@ function MovieDetails(props:any) {
         <>
         <Navigation/>
         <ContentArea>
-        <div>
+        {/* <div> */}
             <div>
                 <MoviePoster movie={movie}/>
             </div>
@@ -59,7 +59,7 @@ function MovieDetails(props:any) {
             <div>
                 <Recommendations />
             </div>
-        </div>
+        {/* </div> */}
         </ContentArea>
         </>
     )

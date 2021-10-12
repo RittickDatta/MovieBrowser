@@ -1,0 +1,20 @@
+.overviewWrapper{
+    position: relative;
+    top: -168px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: 1px solid grey;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.overviewWrapper > h2 {
+    color: #6855d6;
+}
+
+.overviewWrapper > p {
+    color: #7A7373;
+}
+
